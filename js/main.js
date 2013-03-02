@@ -1,61 +1,66 @@
-$(function () {
-    var chart;
-    $(document).ready(function() {
-        chart = new Highcharts.Chart({
-            chart: {
-                renderTo: 'graph',
-                type: 'line',
-            },
-            title: {
-                text: 'Monthly Average Temperature',
-                x: -20 //center
-            },
-            subtitle: {
-                text: 'Source: WorldClimate.com',
-                x: -20
-            },
-            xAxis: {
-                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                    'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            },
-            yAxis: {
-                title: {
-                    text: 'Temperature (°C)'
-                },
-                plotLines: [{
-                    value: 0,
-                    width: 1,
-                    color: '#808080'
-                }]
-            },
-            tooltip: {
-                formatter: function() {
-                        return '<b>'+ this.series.name +'</b><br/>'+
-                        this.x +': '+ this.y +'°C';
-                }
-            },
-            legend: {
-                layout: 'vertical',
-                align: 'right',
-                verticalAlign: 'top',
-                x: -10,
-                y: 100,
-                borderWidth: 0
-            },
-            series: [{
-                name: 'Tokyo',
-                data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-            }, {
-                name: 'New York',
-                data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-            }, {
-                name: 'Berlin',
-                data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-            }, {
-                name: 'London',
-                data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-            }]
-        });
-    });
-    
+var chart;
+var timeoutid;
+var time_last_up = 0;
+
+function append_point(val) {
+	chart.series[0].addPoint(val);
+}
+
+function refresh(i, j) {
+	$.ajax({
+		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
+		type: "GET",
+		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
+	})
+			.done(function(data) {
+		for (noval in data) {
+			time_last_up = data[noval][0];
+			append_point(data[noval]);
+			//alert(time_last_up);
+		}
+	});
+	timeoutid = setTimeout(refresh, 1000, i, j);
+}
+
+function changecapt(i, j) {
+	clearTimeout(timeoutid);
+
+	time_last_up = 0
+
+	$.ajax({
+		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
+		type: "GET",
+		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
+	})
+			.done(function(data) {
+		time_last_up = data[data.length - 1][0];
+
+		$("#content").html("<div id='graph'></div>");
+		chart = new Highcharts.StockChart({
+			chart: {
+				renderTo: "graph",
+			},
+			title: {
+				text: capteurs[i]["values"][j],
+				x: -20 //center
+			},
+			rangeSelector: {
+				selected: 1
+			},
+			series: [{
+					name: "Valeur",
+					data: data
+				}]
+		});
+		setTimeout(refresh, 1000, i, j, time_last_up);
+	});
+}
+
+$(function() {
+	for (var i in capteurs) {
+		$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i]["name"] + "</li>");
+		for (var j in capteurs[i]["values"]) {
+			$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j] + "<a/></li>");
+		}
+	}
 });
