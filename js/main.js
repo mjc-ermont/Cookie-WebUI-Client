@@ -15,6 +15,7 @@ function refresh(i, j) {
 			.done(function(data) {
 		for (noval in data) {
 			time_last_up = data[noval][0];
+			data[noval][0]*=1000;
 			append_point(data[noval]);
 			//alert(time_last_up);
 		}
@@ -34,7 +35,9 @@ function changecapt(i, j) {
 	})
 			.done(function(data) {
 		time_last_up = data[data.length - 1][0];
-
+		for(index in data){
+			data[index][0]*=1000;
+		}
 		$("#content").html("<div id='graph'></div>");
 		chart = new Highcharts.StockChart({
 			chart: {
