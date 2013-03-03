@@ -5,24 +5,24 @@ var capteurs = [
 		values: [
 			{
 				name: "Latitude Degrés",
-				type: ["map", "raw"],
+				type: ["map"],
 				unit: "°"
 			},
 			{
 				name: "Latitude Minutes",
-				type: ["map", "raw"],
+				type: ["map"],
 				unit: "'"
 			},
 			{
 				name: "Longitude Degrés",
-				type: ["map", "raw"],
+				type: ["map"],
 				unit: "°"
 			},
 			{
 				name: "Longitude Minutes",
-				type: ["map", "raw"],
+				type: ["map"],
 				unit: "'"
-			},
+			}
 		]
 	},
 	{
@@ -31,9 +31,9 @@ var capteurs = [
 		values: [
 			{
 				name: "Accélération",
-				type: ["graph", "gauge", "raw"],
+				type: ["graph", "raw"],
 				unit: "G"
-			},
+			}
 		]
 	},
 	{
@@ -42,14 +42,14 @@ var capteurs = [
 		values: [
 			{
 				name: "Humidité",
-				type: ["graph", "gauge", "raw"],
+				type: ["graph", "raw"],
 				unit: "%RH"
 			},
 			{
 				name: "Température Intérieure",
-				type: ["graph", "gauge", "vgauge", "raw"],
+				type: ["graph", "raw"],
 				unit: "°C"
-			},
+			}
 		]
 	},
 	{
@@ -58,9 +58,9 @@ var capteurs = [
 		values: [
 			{
 				name: "Pression",
-				type: ["graph", "gauge", "raw"],
+				type: ["graph", "raw"],
 				unit: "hPa"
-			},
+			}
 		]
 	},
 	{
@@ -69,9 +69,9 @@ var capteurs = [
 		values: [
 			{
 				name: "Temperature",
-				type: ["graph", "gauge", "vgauge", "raw"],
+				type: ["graph", "raw"],
 				unit: "°C"
-			},
+			}
 		]
 	},
 	{
@@ -80,9 +80,60 @@ var capteurs = [
 		values: [
 			{
 				name: "Tension",
-				type: ["graph", "gauge", "raw"], 
+				type: ["graph", "raw"],
 				unit: "V"
-			},
+			}
 		]
-	},
+	}
 ];
+var views = {
+	graph: {
+		display: "Graphique",
+		callback: function(i, j, view, data) {
+			for (index in data) {
+				data[index][0] *= 1000;
+			}
+			$("#content").html("<div id='graph'></div>");
+			chart = new Highcharts.StockChart({
+				chart: {
+					renderTo: "graph"
+				},
+				title: {
+					text: capteurs[i]["values"][j]["name"],
+					x: -20 //center
+				},
+				rangeSelector: {
+					selected: 1
+				},
+				series: [{
+						name: "Valeur",
+						data: data
+					}]
+			});
+		},
+		refresh: function(i, j, view, data, time_last_up) {
+			for (noval in data) {
+				time_last_up = data[noval][0];
+				data[noval][0] *= 1000;
+				chart.series[0].addPoint(data[noval]);
+			}
+		}
+
+
+	},
+	raw: {
+		display: "Données",
+		callback: function(i, j, view, data) {
+
+		}
+	},
+	map: {
+		display: "Carte",
+		callback: function(i, j, view, data) {
+
+		},
+		refresh: function(i, j, view, data, time_last_up) {
+
+		}
+	}
+};
