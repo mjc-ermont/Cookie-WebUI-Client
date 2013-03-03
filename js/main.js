@@ -15,9 +15,8 @@ function refresh(i, j) {
 			.done(function(data) {
 		for (noval in data) {
 			time_last_up = data[noval][0];
-			data[noval][0]*=1000;
+			data[noval][0] *= 1000;
 			append_point(data[noval]);
-			//alert(time_last_up);
 		}
 	});
 	timeoutid = setTimeout(refresh, 1000, i, j);
@@ -35,8 +34,8 @@ function changecapt(i, j) {
 	})
 			.done(function(data) {
 		time_last_up = data[data.length - 1][0];
-		for(index in data){
-			data[index][0]*=1000;
+		for (index in data) {
+			data[index][0] *= 1000;
 		}
 		$("#content").html("<div id='graph'></div>");
 		chart = new Highcharts.StockChart({
@@ -44,7 +43,7 @@ function changecapt(i, j) {
 				renderTo: "graph",
 			},
 			title: {
-				text: capteurs[i]["values"][j],
+				text: capteurs[i]["values"][j]["name"],
 				x: -20 //center
 			},
 			rangeSelector: {
@@ -61,9 +60,9 @@ function changecapt(i, j) {
 
 $(function() {
 	for (var i in capteurs) {
-		$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i]["name"] + "</li>");
-		for (var j in capteurs[i]["values"]) {
-			$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j] + "<a/></li>");
-		}
+			$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i]["name"] + "</li>");
+			for (var j in capteurs[i]["values"]) {
+				$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j]["name"] + "</a></li>");
+			}
 	}
 });

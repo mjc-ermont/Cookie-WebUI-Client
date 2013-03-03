@@ -3,46 +3,86 @@ var capteurs = [
 		name: "GPS",
 		type: "GPS",
 		values: [
-			"Latitude degrés",
-			"Latitude minutes",
-			"Longitude degrés",
-			"Longitude minutes"
+			{
+				name: "Latitude Degrés",
+				type: ["map", "raw"],
+				unit: "°"
+			},
+			{
+				name: "Latitude Minutes",
+				type: ["map", "raw"],
+				unit: "'"
+			},
+			{
+				name: "Longitude Degrés",
+				type: ["map", "raw"],
+				unit: "°"
+			},
+			{
+				name: "Longitude Minutes",
+				type: ["map", "raw"],
+				unit: "'"
+			},
 		]
 	},
 	{
 		name: "Acceleromètre",
 		type: "accelero",
 		values: [
-			"Norme Accélération"
+			{
+				name: "Accélération",
+				type: ["graph", "gauge", "raw"],
+				unit: "G"
+			},
 		]
 	},
 	{
 		name: "Humidité",
 		type: "hum",
 		values: [
-			"Humidité",
-			"Temperature Intérieure"
+			{
+				name: "Humidité",
+				type: ["graph", "gauge", "raw"],
+				unit: "%RH"
+			},
+			{
+				name: "Température Intérieure",
+				type: ["graph", "gauge", "vgauge", "raw"],
+				unit: "°C"
+			},
 		]
 	},
 	{
 		name: "Pression",
 		type: "press",
 		values: [
-			"Pression"
+			{
+				name: "Pression",
+				type: ["graph", "gauge", "raw"],
+				unit: "hPa"
+			},
 		]
 	},
 	{
 		name: "Temperature Exterieure",
 		type: "temp",
 		values: [
-			"Temperature"
+			{
+				name: "Temperature",
+				type: ["graph", "gauge", "vgauge", "raw"],
+				unit: "°C"
+			},
 		]
 	},
 	{
 		name: "Tension Batterie",
 		type: "analog",
 		values: [
-			"Tension"
+			{
+				name: "Tension",
+				type: ["graph", "gauge", "raw"], 
+				unit: "V"
+			},
 		]
 	},
 ];
