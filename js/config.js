@@ -124,7 +124,10 @@ var views = {
 	raw: {
 		display: "Données",
 		callback: function(i, j, view, data) {
-
+			$("#content").html("<h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>");
+		},
+		refresh: function(i, j, view, data, time_last_up) {
+			$("#content").html("<h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>");
 		}
 	},
 	map: {
