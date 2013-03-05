@@ -22,6 +22,16 @@ var capteurs = [
 				name: "Longitude Minutes",
 				type: ["map"],
 				unit: "'"
+			},
+			{
+				name: "Temps UTC",
+				type: ["map"],
+				unit: "H"
+			},
+			{
+				name: "Altitude",
+				type: ["graph", "raw"],
+				unit: "M"
 			}
 		]
 	},
@@ -124,11 +134,14 @@ var views = {
 	raw: {
 		display: "Données",
 		callback: function(i, j, view, data) {
-			$("#content").html("<h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>");
+			$("#content").html("<p><h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>Dernière mise à jour il y à <span id='time_last_up'>" + Math.floor((new Date().getTime() / 1000) - time_last_up) + "</span> secondes</p>");
+			return setInterval(function() {
+				$("#time_last_up").html("" + Math.floor((new Date().getTime() / 1000) - time_last_up));
+			}, 1000);
 		},
 		refresh: function(i, j, view, data, time_last_up) {
-			$("#content").html("<h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>");
-		}
+			$("#content").html("<p><h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>Dernière mise à jour il y à <span id='time_last_up'>" + Math.floor((new Date().getTime() / 1000) - time_last_up) + "</span> secondes</p>");
+		},
 	},
 	map: {
 		display: "Carte",
