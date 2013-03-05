@@ -52,6 +52,18 @@ function changecapt(i, j) {
 	changeview(i, j, 0);
 }
 
+function getchrono(){
+		$.ajax({
+		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get_chrono.php",
+		type: "GET",
+	})
+	.done(function (data){
+		for (var i in data["events"]){
+			$("#chrono").append("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + data["events"][i]["titre"] + "<b class=\"caret\"></b></a><ul class=\"dropdown-menu\"><li class=\"disabled\"><a>" + data["events"][i]["description"] + "</a></li><li class=\"disabled\"><a>" + data["events"][i]["contributeurs"] + "</a></li><li class=\"disabled\"><a>" + data["events"][i]["lieu"] + "</a></li></ul></li>")
+		}
+	});
+}
+
 $(function() {
 	for (var i in capteurs) {
 		$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i]["name"] + "</li>");
@@ -59,4 +71,5 @@ $(function() {
 			$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j]["name"] + "</a></li>");
 		}
 	}
+	getchrono();
 });
