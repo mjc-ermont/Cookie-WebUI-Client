@@ -94,7 +94,18 @@ var capteurs = [
 				unit: "V"
 			}
 		]
-	}
+	},
+	{
+		name: "Pression Exterieure",
+		type: "press",
+		values: [
+			{
+				name: "Pression",
+				type: ["graph", "raw"],
+				unit: "hPa"
+			}
+		]
+	},
 ];
 var views = {
 	graph: {
