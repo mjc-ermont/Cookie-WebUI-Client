@@ -6,32 +6,38 @@ var capteurs = [
 			{
 				name: "Latitude Degrés",
 				type: ["map"],
-				unit: "°"
+				unit: "°",
+				list: false
 			},
 			{
 				name: "Latitude Minutes",
 				type: ["map"],
-				unit: "'"
+				unit: "'",
+				list: false
 			},
 			{
 				name: "Longitude Degrés",
 				type: ["map"],
-				unit: "°"
+				unit: "°",
+				list: false
 			},
 			{
 				name: "Longitude Minutes",
 				type: ["map"],
-				unit: "'"
+				unit: "'",
+				list: false
 			},
 			{
 				name: "Temps UTC",
 				type: ["map"],
-				unit: "H"
+				unit: "H",
+				list: false
 			},
 			{
 				name: "Altitude",
 				type: ["graph", "raw"],
-				unit: "M"
+				unit: "M",
+				list: true
 			}
 		]
 	},
@@ -42,7 +48,8 @@ var capteurs = [
 			{
 				name: "Accélération",
 				type: ["graph", "raw"],
-				unit: "G"
+				unit: "G",
+				list: true
 			}
 		]
 	},
@@ -53,12 +60,14 @@ var capteurs = [
 			{
 				name: "Humidité",
 				type: ["graph", "raw"],
-				unit: "%RH"
+				unit: "%RH",
+				list: true
 			},
 			{
 				name: "Température Intérieure",
 				type: ["graph", "raw"],
-				unit: "°C"
+				unit: "°C",
+				list: true
 			}
 		]
 	},
@@ -69,7 +78,8 @@ var capteurs = [
 			{
 				name: "Pression",
 				type: ["graph", "raw"],
-				unit: "hPa"
+				unit: "hPa",
+				list: true
 			}
 		]
 	},
@@ -80,7 +90,8 @@ var capteurs = [
 			{
 				name: "Temperature",
 				type: ["graph", "raw"],
-				unit: "°C"
+				unit: "°C",
+				list: true
 			}
 		]
 	},
@@ -91,7 +102,8 @@ var capteurs = [
 			{
 				name: "Tension",
 				type: ["graph", "raw"],
-				unit: "V"
+				unit: "V",
+				list: true
 			}
 		]
 	},
@@ -102,7 +114,8 @@ var capteurs = [
 			{
 				name: "Pression",
 				type: ["graph", "raw"],
-				unit: "hPa"
+				unit: "hPa",
+				list: true
 			}
 		]
 	},

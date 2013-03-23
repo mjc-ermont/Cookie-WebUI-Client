@@ -68,7 +68,9 @@ $(function() {
 	for (var i in capteurs) {
 		$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i]["name"] + "</li>");
 		for (var j in capteurs[i]["values"]) {
-			$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j]["name"] + "</a></li>");
+			if (capteurs[i]["values"][j]["list"]) {
+				$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j]["name"] + "</a></li>");
+			}
 		}
 	}
 	getchrono();

@@ -47,7 +47,7 @@ var views = {
 	},
 	map: {
 		display: "Carte",
-		callback: function(i, j, view, data) {
+		callback: function(i, j, view, data) {				// TODO Implementer la carte.
 
 		},
 		refresh: function(i, j, view, data, time_last_up) {
