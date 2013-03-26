@@ -7,7 +7,7 @@ var capteurs = [
 				name: "Latitude Degrés",
 				type: ["map"],
 				unit: "°",
-				list: false
+				list: true
 			},
 			{
 				name: "Latitude Minutes",
@@ -118,5 +118,5 @@ var capteurs = [
 				list: true
 			}
 		]
-	},
+	}
 ];

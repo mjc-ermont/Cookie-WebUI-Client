@@ -10,6 +10,9 @@ function changeview(i, j, view) {
 	$("#views").children("li").attr("class", "");
 	$("#views").children("li:nth-child(" + (view + 1) + ")").attr("class", "active");
 	$("#content").html("");
+	
+	views[capteurs[i]["values"][j]["type"][view]].init(i, j, view);
+	
 	$.ajax({
 		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
 		type: "GET",
