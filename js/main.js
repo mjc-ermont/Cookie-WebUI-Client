@@ -11,16 +11,21 @@ function changeview(i, j, view) {
 	$("#views").children("li:nth-child(" + (view + 1) + ")").attr("class", "active");
 	$("#content").html("");
 	
-	views[capteurs[i]["values"][j]["type"][view]].init(i, j, view);
+	//views[capteurs[i]["values"][j]["type"][view]].init(i, j, view);
 	
 	$.ajax({
 		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
 		type: "GET",
+		async: false,
 		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
 	})
 			.done(function(data) {
 		if (typeof data === "string") {
-			data = JSON.parse(data);
+			if (data === "n"){
+				return;
+			} else {
+				data = JSON.parse(data);
+			}
 		}
 
 		time_last_up = data[data.length - 1][0];
@@ -33,11 +38,14 @@ function refresh(i, j, view) {
 	$.ajax({
 		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
 		type: "GET",
+		async: false,
 		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
 	})
 			.done(function(data) {
 		if (typeof data === "string") {
-			if (data !== "n") {
+			if (data === "n"){
+				return;
+			} else {
 				data = JSON.parse(data);
 			}
 		}

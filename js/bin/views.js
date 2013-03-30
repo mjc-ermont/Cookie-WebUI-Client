@@ -2,8 +2,14 @@ var views = {
 	graph: {
 		display: "Graphique",
 		callback: function(i, j, view, data) {
+			var timestamp = Array();
+			var data_mod = Array();
 			for (index in data) {
 				data[index][0] *= 1000;
+				if (timestamp.indexOf(data[index][0]) === -1){
+					data_mod.push(data[index]);
+				}
+				timestamp[index] = data[index][0];
 			}
 			$("#content").html("<div id='graph'></div>");
 			chart = new Highcharts.StockChart({
@@ -19,7 +25,7 @@ var views = {
 				},
 				series: [{
 						name: "Valeur",
-						data: data
+						data: data_mod
 					}]
 			});
 		},
