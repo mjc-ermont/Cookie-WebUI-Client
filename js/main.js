@@ -16,10 +16,10 @@ function changeview(i, j, view) {
 	$.ajax({
 		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
 		type: "GET",
-		async: false,
 		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
 	})
 			.done(function(data) {
+		timeoutid = setTimeout(refresh, 1000, i, j, view);
 		if (typeof data === "string") {
 			if (data === "n"){
 				return;
@@ -28,20 +28,19 @@ function changeview(i, j, view) {
 			}
 		}
 
-		time_last_up = data[data.length - 1][0];
 		timeoutview = views[capteurs[i]["values"][j]["type"][view]].callback(i, j, view, data);
+		time_last_up = data[data.length - 1][0];
 	});
-	timeoutid = setTimeout(refresh, 1000, i, j, view);
 }
 
 function refresh(i, j, view) {
 	$.ajax({
 		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
 		type: "GET",
-		async: false,
 		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
 	})
 			.done(function(data) {
+		timeoutid = setTimeout(refresh, 1000, i, j, view);
 		if (typeof data === "string") {
 			if (data === "n"){
 				return;
@@ -53,7 +52,6 @@ function refresh(i, j, view) {
 		time_last_up = data[data.length - 1][0];
 		views[capteurs[i]["values"][j]["type"][view]].refresh(i, j, view, data, time_last_up);
 	});
-	timeoutid = setTimeout(refresh, 1000, i, j, view);
 }
 
 function changecapt(i, j) {
@@ -70,6 +68,13 @@ function getchrono() {
 		type: "GET",
 	})
 			.done(function(data) {
+		if (typeof data === "string") {
+			if (data === "n"){
+				return;
+			} else {
+				data = JSON.parse(data);
+			}
+		}
 		for (var i in data["events"]) {
 			$("#chrono").append("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + data["events"][i]["titre"] + "<b class=\"caret\"></b></a><ul class=\"dropdown-menu\"><li class=\"disabled\"><a>" + data["events"][i]["description"] + "</a></li><li class=\"disabled\"><a>" + data["events"][i]["contributeurs"] + "</a></li><li class=\"disabled\"><a>" + data["events"][i]["lieu"] + "</a></li></ul></li>")
 		}
