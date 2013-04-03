@@ -2,8 +2,14 @@ var views = {
 	graph: {
 		display: "Graphique",
 		callback: function(i, j, view, data) {
+			var timestamp = Array();
+			var data_mod = Array();
 			for (index in data) {
 				data[index][0] *= 1000;
+				if (timestamp.indexOf(data[index][0]) === -1){
+					data_mod.push(data[index]);
+				}
+				timestamp[index] = data[index][0];
 			}
 			$("#content").html("<div id='graph'></div>");
 			chart = new Highcharts.StockChart({
@@ -19,7 +25,7 @@ var views = {
 				},
 				series: [{
 						name: "Valeur",
-						data: data
+						data: data_mod
 					}]
 			});
 		},
@@ -53,12 +59,14 @@ var views = {
 				hauteur = window.innerHeight;
 			else if (document.documentElement && document.documentElement.clientHeight)
 				hauteur = document.documentElement.clientHeight;
+				
 			$("#content").html("<div id='map' style='height:" + (hauteur-200) + "px'></div>");
 			map = L.map('map').setView([51.505, -0.09], 13);
 			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
 				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 			}).addTo(map);
 			L.control.scale().addTo(map);
+			L.control.locate().addTo(map);
 		},
 		callback: function(i, j, view, data) {
 
