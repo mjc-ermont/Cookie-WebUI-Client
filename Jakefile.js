@@ -9,10 +9,10 @@ task("default", ["build/min.js"]);
 directory("build");
 
 
-var deps = (new FileList(files_js)).toArray();
-deps.unshift("build");
+var deps_js = (new FileList(files_js)).toArray();
+deps_js.unshift("build");
 
-file("build/min.js", deps, function(){
+file("build/min.js", deps_js, function(){
     var result = "";
 
     result = UglifyJS.minify(new FileList(files_js));
