@@ -2,8 +2,7 @@ var write = require("fs").writeFileSync,
     read = require("fs").readFileSync,
     FileList = require("jake").FileList,
     UglifyJS = require("uglify-js2"),
-    cleanCSS = require('clean-css'),
-    HTMLMinifier = require('html-minifier');
+    cleanCSS = require('clean-css')
 
 var files_js = ["js/*-vendor/*.js", "js/bin/*.js", "js/conf/*.js", "js/*.js"];
 var files_css = ["css/*.css"];
