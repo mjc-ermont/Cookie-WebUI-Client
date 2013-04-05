@@ -4,7 +4,8 @@
 	"description": "Le client javascript de l'interface web du projet ballon 2011 de la MJC d'ermont",
 	"devDependencies": {
 		"uglify-js2": "2.1.11",
-		"jake": "0.5.13"
+		"jake": "0.5.13",
+        "clean-css" : "1.0.0"
 	},
 	"scripts": {
 		"test": "jake"
