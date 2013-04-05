@@ -1,0 +1,17 @@
+{
+    "name": "Cookie Webui Client",
+	"version": "0.1.0",
+	"description": "Le client javascript de l'interface web du projet ballon 2011 de la MJC d'ermont",
+	"devDependencies": {
+		"uglify-js2": "~2.2.5",
+		"jake": "~0.5.10"
+	},
+	"scripts": {
+		"test": "jake"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/mjc-ermont/Cookie-WebUI-Client.git"
+	},
+	"keywords": ["Cookie", "js"]
+}
