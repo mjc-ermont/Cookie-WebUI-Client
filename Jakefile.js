@@ -8,7 +8,7 @@ var write = require("fs").writeFileSync,
 var files_js = ["js/*-vendor/*.js", "js/bin/*.js", "js/conf/*.js", "js/*.js"];
 var files_css = ["css/*.css"];
 
-task("default", ["min_js", "cat_css"]);
+task("default", ["min_js", "min_css"]);
 
 task("min_js", (new FileList(files_js)).toArray(), function(){
 
@@ -18,21 +18,10 @@ task("min_js", (new FileList(files_js)).toArray(), function(){
 });
 
 task("min_css", (new FileList(files_css)).toArray(), function(){
-    var i = 0;
-    (new FileList(files_css)).forEach(function(file){
-        var result = cleanCSS.process(read(file, "utf-8"));
-        write("min/" + i + ".min.css", result);
-        console.log("Minified " + file);
-        i++;
-    });
-});
-
-task("cat_css", ["min_css"], function() {
     var result = "";
-    new FileList("min/*.min.css").forEach(function(name){
-        result += read(name, "utf-8");
-        console.log("Written " + name);
+    (new FileList(files_css)).forEach(function(file){
+        result += cleanCSS.process(read(file, "utf-8"));
     });
     write("build/min.css", result);
-    console.log("Written CSS");
+    console.log("Minified CSS");
 });
