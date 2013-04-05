@@ -1,5 +1,5 @@
 {
-    "name": "Cookie Webui Client",
+    "name": "Cookie-Webui-Client",
 	"version": "0.1.0",
 	"description": "Le client javascript de l'interface web du projet ballon 2011 de la MJC d'ermont",
 	"devDependencies": {
