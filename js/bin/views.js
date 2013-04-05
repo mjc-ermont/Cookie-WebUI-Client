@@ -4,7 +4,7 @@ var views = {
 		callback: function(i, j, view, data) {
 			var timestamp = Array();
 			var data_mod = Array();
-			for (index in data) {
+			for (var index in data) {
 				data[index][0] *= 1000;
 				if (timestamp.indexOf(data[index][0]) === -1){
 					data_mod.push(data[index]);
@@ -17,7 +17,7 @@ var views = {
 					renderTo: "graph"
 				},
 				title: {
-					text: capteurs[i]["values"][j]["name"],
+					text: capteurs[i].values[j].name,
 					x: -20 //center
 				},
 				rangeSelector: {
@@ -30,7 +30,7 @@ var views = {
 			});
 		},
 		refresh: function(i, j, view, data, time_last_up) {
-			for (noval in data) {
+			for (var noval in data) {
 				time_last_up = data[noval][0];
 				data[noval][0] *= 1000;
 				chart.series[0].addPoint(data[noval]);
@@ -42,23 +42,24 @@ var views = {
 	raw: {
 		display: "Données",
 		callback: function(i, j, view, data) {
-			$("#content").html("<p><h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>Dernière mise à jour il y à <span id='time_last_up'>" + Math.floor((new Date().getTime() / 1000) - time_last_up) + "</span> secondes</p>");
+			$("#content").html("<p><h1>" + data[data.length - 1][1] + " " + capteurs[i].values[j].unit + "</h1>Dernière mise à jour il y à <span id='time_last_up'>" + Math.floor((new Date().getTime() / 1000) - time_last_up) + "</span> secondes</p>");
 			return setInterval(function() {
 				$("#time_last_up").html("" + Math.floor((new Date().getTime() / 1000) - time_last_up));
 			}, 1000);
 		},
 		refresh: function(i, j, view, data, time_last_up) {
-			$("#content").html("<p><h1>" + data[data.length - 1][1] + " " + capteurs[i]["values"][j]["unit"] + "</h1>Dernière mise à jour il y à <span id='time_last_up'>" + Math.floor((new Date().getTime() / 1000) - time_last_up) + "</span> secondes</p>");
-		},
+			$("#content").html("<p><h1>" + data[data.length - 1][1] + " " + capteurs[i].values[j].unit + "</h1>Dernière mise à jour il y à <span id='time_last_up'>" + Math.floor((new Date().getTime() / 1000) - time_last_up) + "</span> secondes</p>");
+		}
 	},
 	map: {
 		display: "Carte",
 		init: function(i, j, view) {
 			var hauteur;
-			if (typeof(window.innerHeight) == 'number')
+			if (typeof(window.innerHeight) === 'number'){
 				hauteur = window.innerHeight;
-			else if (document.documentElement && document.documentElement.clientHeight)
+			} else if (document.documentElement && document.documentElement.clientHeight){
 				hauteur = document.documentElement.clientHeight;
+			}
 				
 			$("#content").html("<div id='map' style='height:" + (hauteur-200) + "px'></div>");
 			map = L.map('map').setView([51.505, -0.09], 13);
