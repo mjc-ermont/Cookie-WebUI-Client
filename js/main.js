@@ -1,3 +1,4 @@
+
 var chart;
 var map;
 var timeoutid, timeoutview;
@@ -28,7 +29,7 @@ function changeview(i, j, view) {
 			}
 		}
 
-		timeoutview = views[capteurs[i]["values"][j]["type"][view]].callback(i, j, view, data);
+		timeoutview = views[capteurs[i].values[j].type[view]].callback(i, j, view, data);
 		time_last_up = data[data.length - 1][0];
 	});
 }
@@ -50,13 +51,13 @@ function refresh(i, j, view) {
 		}
 
 		time_last_up = data[data.length - 1][0];
-		views[capteurs[i]["values"][j]["type"][view]].refresh(i, j, view, data, time_last_up);
+		views[capteurs[i].values[j].type[view]].refresh(i, j, view, data, time_last_up);
 	});
 }
 
 function changecapt(i, j) {
 	$("#views").html("");
-	for (var k in capteurs[i]["values"][j]["type"]) {
+	for (var k in capteurs[i].values[j].type) {
 		$("#views").append("<li><a href='#' onclick='changeview(" + i + ", " + j + "," + k + ")'>" + views[capteurs[i]["values"][j]["type"][k]]["display"] + "</a></li>");
 	}
 	changeview(i, j, 0);
@@ -65,7 +66,7 @@ function changecapt(i, j) {
 function getchrono() {
 	$.ajax({
 		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get_chrono.php",
-		type: "GET",
+		type: "GET"
 	})
 			.done(function(data) {
 		if (typeof data === "string") {
@@ -75,18 +76,18 @@ function getchrono() {
 				data = JSON.parse(data);
 			}
 		}
-		for (var i in data["events"]) {
-			$("#chrono").append("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + data["events"][i]["titre"] + "<b class=\"caret\"></b></a><ul class=\"dropdown-menu\"><li class=\"disabled\"><a>" + data["events"][i]["description"] + "</a></li><li class=\"disabled\"><a>" + data["events"][i]["contributeurs"] + "</a></li><li class=\"disabled\"><a>" + data["events"][i]["lieu"] + "</a></li></ul></li>")
+		for (var i in data.events) {
+			$("#chrono").append("<li class=\"dropdown\"><a href=\"#\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">" + data.events[i].titre + "<b class=\"caret\"></b></a><ul class=\"dropdown-menu\"><li class=\"disabled\"><a>" + data.events[i].description + "</a></li><li class=\"disabled\"><a>" + data.events[i].contributeurs + "</a></li><li class=\"disabled\"><a>" + data.events[i].lieu + "</a></li></ul></li>");
 		}
 	});
 }
 
 $(function() {
 	for (var i in capteurs) {
-		$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i]["name"] + "</li>");
-		for (var j in capteurs[i]["values"]) {
-			if (capteurs[i]["values"][j]["list"]) {
-				$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i]["values"][j]["name"] + "</a></li>");
+		$("#sidebar").append("<li class=\"nav-header\">" + capteurs[i].name + "</li>");
+		for (var j in capteurs[i].values) {
+			if (capteurs[i].values[j].list) {
+				$("#sidebar").append("<li><a href=\"#\" onclick=changecapt(" + i + "," + j + ")>" + capteurs[i].values[j].name + "</a></li>");
 			}
 		}
 	}
