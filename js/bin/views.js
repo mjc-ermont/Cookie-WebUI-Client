@@ -53,7 +53,7 @@ var views = {
 	},
 	map: {
 		display: "Carte",
-		init: function(i, j, view) {
+		callback: function(i, j, view, data) {
 			var hauteur;
 			if (typeof(window.innerHeight) === 'number'){
 				hauteur = window.innerHeight;
@@ -68,9 +68,6 @@ var views = {
 			}).addTo(map);
 			L.control.scale().addTo(map);
 			L.control.locate().addTo(map);
-		},
-		callback: function(i, j, view, data) {
-
 		},
 		refresh: function(i, j, view, data, time_last_up) {
 
