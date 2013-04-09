@@ -31,7 +31,13 @@ task("copy_img", (new FileList("css/images/*")).toArray(), function(){
 });
 
 task("min_html", "index.html", function(){
-    write("build/index.html", HTMLMinify(read("index.html", "utf-8"), {collapseBooleanAttributes: true, removeComments: true, collapseWhitespace: true, removeAttributeQuotes: true, removeEmptyAttributes: true, removeRedundantAttributes: true}));
+    var file_contents = read("index.html", "utf-8");
+    file_contents = HTMLMinify(file_contents, {collapseWhitespace: true});
+    var pattern_dev = new RegExp("<dev>(.*)</dev>", "gi");
+    var pattern_prod = new RegExp("<!--PROD(.*)-->", "gi");
+    file_contents = file_contents.replace(pattern_dev, "");
+    file_contents = file_contents.replace(pattern_prod, "$1");
+    write("build/index.html", HTMLMinify(file_contents, {collapseBooleanAttributes: true, removeComments: true, collapseWhitespace: true, removeAttributeQuotes: true, removeEmptyAttributes: true, removeRedundantAttributes: true}));
     console.log("Minified HTML");
 });
 
