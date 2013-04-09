@@ -66,11 +66,13 @@ var views = {
 				
 			$("#content").html("<div id='map' style='height:" + (hauteur-200) + "px'></div>");
 			map = L.map('map').setView([51.505, -0.09], 13);
-			L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-				attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-			}).addTo(map);
+    		var osm = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    			attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+			});
+            osm.addTo(map);
 			L.control.scale().addTo(map);
 			L.control.locate().addTo(map);
+            L.Control.Zoomslider().addTo(map);
 		},
 		refresh: function(i, j, view, data, time_last_up) {
 
