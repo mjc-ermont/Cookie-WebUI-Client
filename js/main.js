@@ -1,6 +1,3 @@
-
-var chart;
-var map;
 var timeoutid, timeoutview;
 var time_last_up = 0;
 

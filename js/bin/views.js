@@ -1,3 +1,6 @@
+var chart;
+var map;
+
 var views = {
 	graph: {
 		display: "Graphique",
