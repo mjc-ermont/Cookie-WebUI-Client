@@ -3,12 +3,13 @@ var write = require("fs").writeFileSync,
     FileList = require("jake").FileList,
     UglifyJS = require("uglify-js2"),
     cleanCSS = require('clean-css'),
-    copy = require("jake").cpR;
+    copy = require("jake").cpR,
+    HTMLMinify = require("html-minifier").minify;
 
 var files_js = ["js/*-vendor/*.js", "js/bin/*.js", "js/conf/*.js", "js/*.js"];
 var files_css = ["css/*.css"];
 
-task("default", ["build", "min_js", "min_css", "copy_img"]);
+task("default", ["build", "min_js", "min_css", "copy_img", "min_html"]);
 
 task("min_js", (new FileList(files_js)).toArray(), function(){
     var result = UglifyJS.minify((new FileList(files_js)).sort());
@@ -27,7 +28,12 @@ task("min_css", (new FileList(files_css)).toArray(), function(){
 
 task("copy_img", (new FileList("css/images/*")).toArray(), function(){
     copy("css/images", "build");
-    //console.log("Images copied");
 });
+
+task("min_html", "index.html", function(){
+    write("build/index.html", HTMLMinify(read("index.html", "utf-8"), {collapseBooleanAttributes: true, removeComments: true, collapseWhitespace: true, removeAttributeQuotes: true, removeEmptyAttributes: true, removeRedundantAttributes: true}));
+    console.log("Minified HTML");
+});
+
 
 directory("build");

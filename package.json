@@ -5,7 +5,8 @@
 	"devDependencies": {
 		"uglify-js2": "2.1.11",
 		"jake": "0.5.13",
-        "clean-css" : "1.0.0"
+        "clean-css" : "1.0.0",
+        "html-minifier" : "0.5.0"
 	},
 	"scripts": {
 		"test": "jake"
