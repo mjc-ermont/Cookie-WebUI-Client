@@ -17,7 +17,7 @@ function changeview(i, j, view) {
 	$("#content").html(""); // On vide le contenu de l'ancienne vue
 	
 	$.ajax({
-		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
+		url: server + "/bin/get.php",
 		type: "GET",
 		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
 	})
@@ -47,7 +47,7 @@ function changeview(i, j, view) {
 
 function refresh(i, j, view) {
 	$.ajax({
-		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get.php",
+		url: server + "/bin/get.php",
 		type: "GET",
 		data: "t=" + time_last_up + "&c=" + i + "&v=" + j
 	})
@@ -88,7 +88,7 @@ function changecapt(i, j) {
 
 function getchrono() {
 	$.ajax({
-		url: "http://home.konfiot.net/Cookie-WebUI-Server/bin/get_chrono.php",
+		url: server + "/bin/get_chrono.php",
 		type: "GET"
 	})
 			.done(function(data) {

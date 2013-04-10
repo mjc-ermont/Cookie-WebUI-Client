@@ -1,0 +1,1 @@
+var server = 'http://home.konfiot.net/Cookie-WebUI-Server';
