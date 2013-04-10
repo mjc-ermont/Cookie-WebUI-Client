@@ -6,7 +6,7 @@ var write = require("fs").writeFileSync,
     copy = require("jake").cpR,
     HTMLMinify = require("html-minifier").minify;
 
-var files_js = ["js/*-vendor/*.js", "js/bin/*.js", "js/conf/*.js", "js/*.js"];
+var files_js = ["js/*-vendor/*.js", "js/*-bin/*.js", "js/conf/*.js", "js/*.js"];
 var files_css = ["css/*.css"];
 
 task("default", ["build", "min_js", "min_css", "copy_img", "min_html"]);
