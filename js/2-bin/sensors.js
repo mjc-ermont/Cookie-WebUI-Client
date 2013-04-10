@@ -30,8 +30,8 @@ function changeview(i, j, view) {
 			}
 		}
 
+    	time_last_up = data[data.length - 1][0];    // On met a jour le timestamp de la dernière donnée reçue
 		timeoutview = views[capteurs[i].values[j].type[view]].callback(i, j, view, data);   // On appelle le callback du la nouvelle vue pour l'initialiser
-		time_last_up = data[data.length - 1][0];    // On met a jour le timestamp de la dernière donnée reçue
 	})
             .always(function(){
                 timeoutid = setTimeout(refresh, 1000, i, j, view);  // On pose un timeout pour l'actualisation de la nouvelle vue
