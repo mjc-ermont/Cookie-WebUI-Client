@@ -1,90 +1,100 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <title>Cookie WebUI</title>
-        <meta name="viewport" content="width=device-width">
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7">
+<![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8">
+<![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9">
+<![endif]-->
+<!--[if gt IE 8]>
+<!-->
+<html class="no-js">
+<!--<![endif]-->
 
-        <style>
-            body {
-                padding-top: 60px;
-                padding-bottom: 40px;
-            }
-        </style>
-        <dev>
-            <link rel="stylesheet" href="css/bootstrap.css">
-            <link rel="stylesheet" href="css/bootstrap-responsive.css">
-            <link rel="stylesheet" href="css/main.css">
-            <link rel="stylesheet" href="css/leaflet.css" />
-            <link rel="stylesheet" href="css/L.Control.Locate.css" />
-            <link rel="stylesheet" href="css/L.Control.Zoomslider.css" />
-        </dev>
-        <!--PROD<link rel="stylesheet" href="min.css" />-->
+<head>
+    <meta charset="utf-8">
+    <title>Cookie WebUI</title>
+    <meta name="viewport" content="width=device-width">
+    <style>
+        body {
+            padding-top: 60px;
+            padding-bottom: 40px;
+        }
+    </style>
+    <dev>
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <link rel="stylesheet" href="css/L.Control.Locate.css" />
+        <link rel="stylesheet" href="css/L.Control.Zoomslider.css" />
+    </dev>
+    <!--PROD<link rel="stylesheet" href="min.css" />--></head>
 
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-        <![endif]-->
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container-fluid">
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="#">Cookie WebUI</a>
-                    <div class="nav-collapse collapse">
-                        <ul class="nav" id="chrono">
-                        </ul>
-                    </div><!--/.nav-collapse -->
+<body>
+    <!--[if lt IE 7]>
+        <p class="chromeframe">You are using an
+            <strong>outdated</strong>browser. Please
+            <a href="http://browsehappy.com/">upgrade your browser</a>or
+            <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a>to improve your experience.</p>
+    <![endif]-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </a>
+                <a class="brand" href="#">Cookie WebUI</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav" id="chrono"></ul>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <!-- Example row of columns -->
+        <div class="row-fluid">
+            <div class="span2">
+                <ul id="sidebar" class="well nav nav-list"></ul>
+            </div>
+            <div class="span10">
+                <ul class="nav nav-tabs" id="views"></ul>
+                <div id="content">
+                    <div id="bar_container">
+                        <div class="progress progress-striped active">
+                            <div id="bar" class="bar" style="width: 20%;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <footer style="text-align: center;margin-top: 25px">
+            <p>Fork us on
+                <a target="_blank" href="https://github.com/mjc-ermont/">Github</a>
+            </p>
+        </footer>
+    </div>
+    <!-- /container -->
+    <!--PROD<script src="min.js"></script>-->
+    <dev>
+        <script src="js/1-vendor/1-jquery-1.9.1.js"></script>
+        <script src="js/1-vendor/2-leaflet.js"></script>
+        <script src="js/1-vendor/highstock.js"></script>
+        <script src="js/1-vendor/L.Control.Locate.js"></script>
+        <script src="js/1-vendor/L.Control.Zoomslider.js"></script>
+        <script src="js/1-vendor/bootstrap.js"></script>
+        <script src="js/conf/capteurs.js"></script>
+        <script src="js/conf/server.js"></script>
+        <script src="js/2-bin/views.js"></script>
+        <script src="js/2-bin/chrono.js"></script>
+        <script src="js/2-bin/sensors.js"></script>
+        <script src="js/main.js"></script>
+    </dev>
+</body>
 
-        <div class="container-fluid">
-            <!-- Example row of columns -->
-			<div class="row-fluid">
-				<div class="span2">
-					<ul id="sidebar" class="well nav nav-list">
-
-					</ul>
-				</div>
-				<div class="span10">
-					<ul class="nav nav-tabs" id="views">
-
-					</ul>
-					<div id="content">
-
-					</div>
-				</div>
-			</div>
-
-			<footer style="text-align: center;margin-top: 25px">
-				<p>Fork us on <a target="_blank" href="https://github.com/mjc-ermont/">Github</a></p>
-			</footer>
-
-        </div> <!-- /container -->
-
-        <!--PROD<script src="min.js"></script>-->
-        <dev>
-            <script src="js/1-vendor/1-jquery-1.9.1.js"></script>
-            <script src="js/1-vendor/2-leaflet.js"></script>
-    		<script src="js/1-vendor/highstock.js"></script>
-            <script src="js/1-vendor/L.Control.Locate.js"></script>
-            <script src="js/1-vendor/L.Control.Zoomslider.js"></script>
-            <script src="js/1-vendor/bootstrap.js"></script>
-            <script src="js/conf/capteurs.js"></script>
-            <script src="js/conf/server.js"></script>
-            <script src="js/2-bin/views.js"></script>
-            <script src="js/2-bin/chrono.js"></script>
-            <script src="js/2-bin/sensors.js"></script>
-            <script src="js/main.js"></script>
-        </dev>
-    </body>
 </html>
