@@ -76,6 +76,8 @@ function refresh(i, j, view) {
 
 function changecapt(i, j) {
 	$("#views").html(""); // On vide le contenu des onglets qui contiennent les vues de l'ancien capteur
+    $(".sensor_list").attr("class", "sensor_list");
+    $("#"+i+""+j).attr("class", "sensor_list active");
 	for (var k in capteurs[i].values[j].type) {
 		$("#views").append("<li><a href='#' onclick='changeview(" + i + ", " + j + "," + k + ")'>" + views[capteurs[i].values[j].type[k]].display + "</a></li>");   // On remplit les onglets avec les nouvelles valeurs
 	}
