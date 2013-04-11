@@ -10,8 +10,8 @@ $(function() {
 	}
     $("#bar").css("width", "70%");
 	getchrono();    // On actualise la chronologie
-    $("#bar").css("width", "1000%");
+    $("#bar").css("width", "100%");
     setTimeout(function() {
-        $("#bar_container").html("");
-    }, 1500);
+        $("#bar_container").fadeOut();
+    }, 500);
 });
