@@ -7,29 +7,24 @@ var capteurs = [
 				name: "Latitude Degrés",
 				type: ["map"],
 				unit: "°",
-				list: true
-			},
-			{
-				name: "Latitude Minutes",
-				type: ["map"],
-				unit: "'",
-				list: false
+				list: false,
+                group: "Position"
 			},
 			{
 				name: "Longitude Degrés",
 				type: ["map"],
 				unit: "°",
-				list: false
+				list: false,
+                group: "Position"
 			},
-			{
-				name: "Longitude Minutes",
-				type: ["map"],
-				unit: "'",
-				list: false
-			},
-			{
+    		{
+				name: "Vitesse",
+				type: ["graph", "raw"],
+				unit: "Knots",
+				list: true
+			},    		{
 				name: "Temps UTC",
-				type: ["map"],
+				type: [],
 				unit: "H",
 				list: false
 			},
