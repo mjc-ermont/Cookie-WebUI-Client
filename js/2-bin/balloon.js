@@ -27,7 +27,7 @@ function Balloon(options) {
     };
     
     this.getValues = function () {
-        var values = [];
+        var values = {};
         for (var i in this.sensors){
             values[this.sensors[i].name] = this.sensors[i].getValues();
         }

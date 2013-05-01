@@ -1,4 +1,4 @@
-var sensor, value, view, balloon;
+var balloon;
 $(function() {
     /*$("#bar").css("width", "60%");
 	for (var i in capteurs) {
@@ -21,23 +21,102 @@ $(function() {
     }, 500);*/
     balloon = new Balloon({
         sensors:[{
-            name: "Xday",
+            name: "GPS",
             values: [{
-                name: "beat",
-                ids: [0,1,2,3],
+                name: "Position",
+                ids: [0,1],
+                views: [new GraphView()]
+            },
+            {
+                name: "Vitesse",
+                ids: [2],
+                views: [new GraphView()]
+            },
+            {
+                name: "Altitude",
+                ids: [4],
+                views: [new GraphView()]
+            }]
+        },
+        {
+            name: "Acceleromètre",
+            values: [{
+                name: "Norme accélération",
+                ids: [0],
+                views: [new GraphView()]
+            }]
+        },
+        {
+            name: "Humidité",
+            values: [{
+                name: "Humidité",
+                ids: [0],
+                views: [new GraphView()]
+            },
+            {
+                name: "Température Intérieure",
+                ids: [1],
+                views: [new GraphView()]
+            }]
+        },
+        {
+            name: "Pression intérieure",
+            values: [{
+                name: "Pression intérieure",
+                ids: [0],
+                views: [new GraphView()]
+            }]
+        },
+        {
+            name: "Température éxtérieure",
+            values: [{
+                name: "Température éxtérieure",
+                ids: [0],
+                views: [new GraphView()]
+            }]
+        },
+        {
+            name: "Pile",
+            values: [{
+                name: "Tension Pile",
+                ids: [0],
+                views: [new GraphView()]
+            }]
+        },
+        {
+            name: "Pression éxtérieure",
+            values: [{
+                name: "Pression éxtérieure",
+                ids: [0],
                 views: [new GraphView()]
             }]
         }]
     });
+    
+    var values = balloon.getValues();
+    var k = 0, l = 0;
+    for (var i in values){
+        $("#sidebar").append("<li class=\"nav-header\">" + i + "</li>");
+        for (var j in values[i]){
+            $("#sidebar").append("<li onclick='changecapt("+k+","+l+")'><a href='#'>" + values[i][j] + "</a></li>");
+            l++;
+        }
+        k++;
+        l=0;
+    }
 
     $.ajax({
-    	url: server + "/bin/get.php",
-    	type: "GET",
-    	data: "t=0"
+        url: server + "/bin/get.php",
+        type: "GET",
+        data: "t=0"
 	})
 			.done(function(data) {
         balloon.addData(data);
-        balloon.setValue(0,0);
-        balloon.refresh();
     });
 });
+
+function changecapt(no_capt, no_val){
+    balloon.setValue(no_capt, no_val);
+//    balloon.refresh();
+
+}

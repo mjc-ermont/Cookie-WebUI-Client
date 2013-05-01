@@ -8,9 +8,9 @@ function GraphView (options){
     };
     
     this.setUp = function (data){
-		for (var index in data[0]) {
+		/*for (var index in data[0]) {
 			data[0][index][0] *= 1000;
-		}
+		}*/
 		$("#content").html("<div id='graph'></div>");
 		this.chart = new Highcharts.StockChart({
 			chart: {
@@ -31,7 +31,7 @@ function GraphView (options){
     };
     
     this.refresh = function (data){    		
-		data[0][0][0] *= 1000;
+		//data[0][0][0] *= 1000;
 		this.chart.series[0].addPoint(data[0][0]);
     };
 }
