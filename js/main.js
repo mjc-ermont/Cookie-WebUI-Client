@@ -1,4 +1,5 @@
 var balloon;
+var last_update;
 $(function() {
     /*$("#bar").css("width", "60%");
 	for (var i in capteurs) {
@@ -25,7 +26,7 @@ $(function() {
             values: [{
                 name: "Position",
                 ids: [0,1],
-                views: [new GraphView()]
+                views: [new GraphView(), new MapView()]
             },
             {
                 name: "Vitesse",
@@ -94,14 +95,16 @@ $(function() {
     });
     
     var values = balloon.getValues();
-    var k = 0, l = 0;
+    var k = 0, l = 0, m = 0;
     for (var i in values){
         $("#sidebar").append("<li class=\"nav-header\">" + i + "</li>");
         for (var j in values[i]){
-            $("#sidebar").append("<li onclick='changecapt("+k+","+l+")'><a href='#'>" + values[i][j] + "</a></li>");
+            $("#sidebar").append("<li onclick='changecapt("+k+","+l+","+m+")'><a href='#'>" + values[i][j] + "</a></li>");
             l++;
+            m++;
         }
         k++;
+        m++;
         l=0;
     }
 
@@ -112,11 +115,27 @@ $(function() {
 	})
 			.done(function(data) {
         balloon.addData(data);
+        last_update = Math.round(Date.now()/1000, 1);
+        setInterval(function(){
+            $.ajax({
+                url: server + "/bin/get.php",
+                type: "GET",
+                data: "t=" + last_update
+            })
+        			.done(function(data) {
+                balloon.addData(data);
+                last_update = Math.round(Date.now()/1000, 1);
+        	});
+        }, 5000);
     });
 });
 
-function changecapt(no_capt, no_val){
+function changecapt(no_capt, no_val, id_list){
     balloon.setValue(no_capt, no_val);
-//    balloon.refresh();
+    $("#sidebar").children("li").removeClass("active");
+    $("#sidebar").children("li:nth-child(" + (id_list+2) + ")").addClass("active");
+}
 
+function changeview (id_view) {
+    balloon.setView(id_view);
 }

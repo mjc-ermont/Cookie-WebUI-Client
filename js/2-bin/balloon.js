@@ -37,6 +37,10 @@ function Balloon(options) {
         this.sensors[this.current_sensor].refresh();
     };
     
+    this.setView = function (id_view){
+        this.sensors[this.current_sensor].setView(id_view);
+    }
+    
     for (var j in options.sensors){
         this.addSensor(new Sensor(options.sensors[j]));
     }

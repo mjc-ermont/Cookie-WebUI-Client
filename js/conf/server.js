@@ -1,1 +1,1 @@
-var server = 'http://home.konfiot.net/Cookie-WebUI-Server';
+var server = 'http://crana.tk/Cookie-WebUI-Server';

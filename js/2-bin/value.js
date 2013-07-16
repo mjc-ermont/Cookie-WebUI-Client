@@ -2,7 +2,7 @@ function Value (options) {
     this._data= Array();
     this._views= [];
     this.last_data_refreshed= [];
-    this.current_view= 0;
+    this.current_view= -1;
     this.name= options.name;
     this.unit= options.unit;
     this.ids = options.ids;
@@ -11,9 +11,9 @@ function Value (options) {
     }
 
     this.setUp= function () {
-        $("views").html("");
+        $("#views").html("");
         for (i in this._views){
-            $("#views").append("<li><a href='#' onclick='changeview()'>" + this._views[i].name + "</a></li>");
+            $("#views").append("<li><a href='#' onclick='changeview(" + i + ")'>" + this._views[i].name + "</a></li>");
         }
         this.setView(0);
     };
@@ -22,6 +22,7 @@ function Value (options) {
         id_val = parseInt(id_val, 10);
         data[0]*=1000;
         this._data[this.ids.indexOf(id_val)][this._data[this.ids.indexOf(id_val)].length] = data;
+
     };
     
     this.addView= function (view){
@@ -34,6 +35,8 @@ function Value (options) {
             this.last_data_refreshed[i] = this._data[i].length;
         }
         this._views[view_id].setUp(this.getData());
+        $("#views").children("li").attr("class", "");
+        $("#views").children("li:nth-child(" + (view_id + 1) + ")").attr("class", "active");
     };
     
     this.refresh= function (){

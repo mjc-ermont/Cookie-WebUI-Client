@@ -34,6 +34,9 @@ function Sensor (options) {
     this.refresh = function () {
         this._values[this.current_value].refresh();
     };
+    this.setView = function (id_view) {
+        this._values[this.current_value].setView(id_view);
+    }
     
     for (var i in options.values){
         this.addValue(new Value(options.values[i]));

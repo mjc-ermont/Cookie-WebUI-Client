@@ -23,6 +23,7 @@ function MapView (options){
 		L.control.scale().addTo(this.map);
 		L.control.locate().addTo(this.map);
         L.Control.Zoomslider().addTo(this.map);
+        this.line = L.polyline(latlngs, {color: 'red'}).addTo(this.map);
     };
     
     this.refresh = function (data){
