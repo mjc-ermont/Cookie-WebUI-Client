@@ -114,6 +114,8 @@ $(function() {
         data: "t=0"
 	})
 			.done(function(data) {
+        $("#bar_container").hide();
+        $("#app").show();
         balloon.addData(data);
         last_update = Math.round(Date.now()/1000, 1);
         setInterval(function(){

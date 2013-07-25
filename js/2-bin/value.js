@@ -1,5 +1,5 @@
 function Value (options) {
-    this._data= Array();
+    this._data= [];
     this._views= [];
     this.last_data_refreshed= [];
     this.current_view= -1;
