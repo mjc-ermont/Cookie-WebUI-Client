@@ -1,1 +1,1 @@
-var server = 'http://crana.tk/Cookie-WebUI-Server';
+var server = 'https://82.237.11.61/Cookie-WebUI-Server';
