@@ -113,7 +113,6 @@ $(function() {
         data: "t=0"
 	})
 			.done(function(data) {
-        $("#bar_container").hide();
         $("#app").show();
         balloon.addData(data);
         setInterval(function(){
