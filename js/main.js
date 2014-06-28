@@ -1,5 +1,4 @@
 var balloon;
-var last_update;
 $(function() {
     /*$("#bar").css("width", "60%");
 	for (var i in capteurs) {
@@ -117,16 +116,14 @@ $(function() {
         $("#bar_container").hide();
         $("#app").show();
         balloon.addData(data);
-        last_update = Math.round(Date.now()/1000, 1);
         setInterval(function(){
             $.ajax({
                 url: server + "/bin/get.php",
                 type: "GET",
-                data: "t=" + last_update
+                data: "t=" + balloon.get_last_update()
             })
         			.done(function(data) {
                 balloon.addData(data);
-                last_update = Math.round(Date.now()/1000, 1);
         	});
         }, 5000);
     });
