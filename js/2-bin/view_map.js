@@ -28,12 +28,18 @@ function MapView (options){
         console.log(latlngs);
         osm.addTo(this.map);
         this.line = window.L.polyline(latlngs, {color: 'red'}).addTo(this.map);
+        this.map.fitBounds(this.line.getBounds());
 		window.L.control.scale().addTo(this.map);
 		window.L.control.locate().addTo(this.map);
         window.L.Control.Zoomslider().addTo(this.map);
     };
     
     this.refresh = function (data){
-        
+        for (var i in data[0]){
+            if (typeof(data[1][i]) !== "undefined"){
+                this.line.addLatLng([data[0][i][1], data[1][i][1]]);
+            }
+        }
+        this.map.fitBounds(this.line.getBounds());
     };
 }
