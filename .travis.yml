@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-  - "0.11"
-  - "0.10"
-  - "0.8"
-  - "0.6"
+- '0.10'
+deploy:
+  provider: releases
+  api_key:
+    secure: Yfr6liG0fOJjcPCqGAMj/UQernxIRAL7xYpK01hhxOsgJJwYyKU3i5OFoSbJOs/9bgsJr0W2B12X25qJUyVK52L6ekYc/L+VbZ1zppuh4lbknUWtOENZy30Zn70DNVlLxy8vZmopvsNzsFVUUUeMNhQsjm83TC2RPxu1BHhlnvk=
+  file: build.tar.gz
+  on:
+    repo: mjc-ermont/Cookie-WebUI-Client
+after_script: tar -czf build.tar.gz build
