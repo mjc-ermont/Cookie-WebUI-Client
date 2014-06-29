@@ -10,4 +10,4 @@ deploy:
     tags: true
     repo: mjc-ermont/Cookie-WebUI-Client
   skip_cleanup: true
-after_script: tar -czf build.tar.gz build
+before_deploy: tar -czf build.tar.gz build
