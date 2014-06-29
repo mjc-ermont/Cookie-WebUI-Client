@@ -32,6 +32,8 @@ function GraphView (options){
     
     this.refresh = function (data){    		
 		//data[0][0][0] *= 1000;
-		this.chart.series[0].addPoint(data[0][0]);
+		for (var i = 0; i < data[0].length; i += 1){
+			this.chart.series[0].addPoint(data[0][i]);
+	    }
     };
 }
