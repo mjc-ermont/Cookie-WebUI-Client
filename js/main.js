@@ -100,10 +100,11 @@ $(function() {
             $.ajax({
                 url: server + "/bin/get.php",
                 type: "GET",
-                data: "t=" + balloon.get_last_update()
+                data: "t=" + Math.round(balloon.get_last_update()/1000)
             })
         			.done(function(data) {
                 balloon.addData(data);
+                balloon.refresh();
         	});
         }, 5000);
     });

@@ -32,7 +32,8 @@ function GraphView (options){
     
     this.refresh = function (data){    		
 		//data[0][0][0] *= 1000;
-		for (var i = 0; i < data[0].length; i += 1){
+		console.log(data);
+        for (var i in data[0]){
 			this.chart.series[0].addPoint(data[0][i]);
 	    }
     };
